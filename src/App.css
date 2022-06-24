@@ -6,6 +6,20 @@
   flex-direction: column;
 }
 
+.cardImg {
+  border: solid black 3px;
+  border-radius: 5px;
+  max-width: 500px;
+}
+
+.cardCreated {
+  align-content: center;
+  align-items: center;
+  border: solid black 3px;
+  display: flex;
+  flex-direction: column;
+}
+
 label {
   margin: 4px;
 }
