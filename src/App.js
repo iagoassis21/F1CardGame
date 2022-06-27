@@ -7,8 +7,7 @@ class App extends React.Component {
   constructor() {
     super();
 
-    this.state = {
-      cardName: '',
+    this.state = { cardName: '',
       cardDescription: '',
       cardAttr1: '',
       cardAttr2: '',
@@ -28,7 +27,7 @@ class App extends React.Component {
     });
   }
 
-  checkState = () => {
+  validateSubmitButton = () => {
     const maxStats = 90;
     const minStats = 0;
     const maxStatsOverall = 210;
@@ -62,10 +61,26 @@ class App extends React.Component {
   }
 
   isSaveButtonDisabled = () => {
-    if (this.checkState()) {
+    if (this.validateSubmitButton()) {
       return true;
     }
     return false;
+  }
+
+  onSaveButtonClick = (e) => {
+    e.preventDefault();
+
+    this.setState({
+      cardName: '',
+      cardDescription: '',
+      cardAttr1: 0,
+      cardAttr2: 0,
+      cardAttr3: 0,
+      cardImage: '',
+      cardRare: '',
+      cardTrunfo: false,
+      hasTrunfo: false,
+    });
   }
 
   render() {
@@ -78,7 +93,6 @@ class App extends React.Component {
       cardRare,
       cardTrunfo,
       hasTrunfo,
-      onSaveButtonClick,
     } = this.state;
 
     return (
@@ -96,7 +110,7 @@ class App extends React.Component {
           hasTrunfo={ hasTrunfo }
           onInputChange={ this.onInputChange }
           isSaveButtonDisabled={ this.isSaveButtonDisabled() }
-          onSaveButtonClick={ onSaveButtonClick }
+          onSaveButtonClick={ this.onSaveButtonClick }
         />
         <Card
           cardName={ cardName }

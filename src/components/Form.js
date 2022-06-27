@@ -2,12 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 class Form extends React.Component {
-//   handleSubmit = (event) => {
-//     event.preventDefault();
-//     const { onSaveButtonClick } = this.props;
-//     onSaveButtonClick(this.state);
-//   }
-
   render() {
     const { cardName,
       cardDescription,
