@@ -21,8 +21,6 @@ class App extends React.Component {
   }
 
   onInputChange = ({ target }) => {
-    console.log(this.state);
-    this.verifySuperTrunfo();
     const { name, type } = target;
     const value = type === 'checkbox' ? target.checked : target.value;
     this.setState({
@@ -74,16 +72,7 @@ class App extends React.Component {
     const { cards } = this.state;
     const checkSP = cards.map((key) => key.cardTrunfo)
       .some((value) => value === true);
-    if (checkSP) {
-      this.setState(() => ({
-        hasTrunfo: true,
-      }));
-    } else {
-      this.setState(() => ({
-        hasTrunfo: false,
-      }));
-    }
-    console.log(checkSP);
+    return checkSP;
   };
 
   onSaveButtonClick = (e) => {
@@ -113,7 +102,7 @@ class App extends React.Component {
       cardImage: '',
       cardRare: '',
       cardTrunfo: false,
-      hasTrunfo: prevState,
+      hasTrunfo: false,
       cards: [newCard, ...prevState.cards],
     }));
   };
@@ -127,7 +116,6 @@ class App extends React.Component {
       cardImage,
       cardRare,
       cardTrunfo,
-      hasTrunfo,
       cards,
     } = this.state;
     return (
@@ -142,7 +130,7 @@ class App extends React.Component {
           cardImage={ cardImage }
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
-          hasTrunfo={ hasTrunfo }
+          hasTrunfo={ this.verifySuperTrunfo() }
           onInputChange={ this.onInputChange }
           isSaveButtonDisabled={ this.isSaveButtonDisabled() }
           onSaveButtonClick={ this.onSaveButtonClick }
