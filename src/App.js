@@ -21,6 +21,8 @@ class App extends React.Component {
   }
 
   onInputChange = ({ target }) => {
+    console.log(this.state);
+    this.verifySuperTrunfo();
     const { name, type } = target;
     const value = type === 'checkbox' ? target.checked : target.value;
     this.setState({
@@ -68,20 +70,30 @@ class App extends React.Component {
     return false;
   }
 
+  verifySuperTrunfo = () => {
+    const { cards } = this.state;
+    const checkSP = cards.map((key) => key.cardTrunfo)
+      .some((value) => value === true);
+    if (checkSP) {
+      this.setState(() => ({
+        hasTrunfo: true,
+      }));
+    } else {
+      this.setState(() => ({
+        hasTrunfo: false,
+      }));
+    }
+    console.log(checkSP);
+  };
+
   onSaveButtonClick = (e) => {
     e.preventDefault();
 
-    const { cardName,
-      cardDescription,
-      cardAttr1,
-      cardAttr2,
-      cardAttr3,
-      cardImage,
-      cardRare,
-      cardTrunfo } = this.state;
+    const { cardName, cardDescription, cardAttr1,
+      cardAttr2, cardAttr3, cardImage, cardRare,
+      cardTrunfo, hasTrunfo } = this.state;
 
-    const newCard = {
-      cardName,
+    const newCard = { cardName,
       cardDescription,
       cardAttr1,
       cardAttr2,
@@ -89,19 +101,19 @@ class App extends React.Component {
       cardImage,
       cardRare,
       cardTrunfo,
-      // hasTrunfo,
+      hasTrunfo,
     };
 
     this.setState((prevState) => ({
       cardName: '',
       cardDescription: '',
-      cardAttr1: 0,
-      cardAttr2: 0,
-      cardAttr3: 0,
+      cardAttr1: '0',
+      cardAttr2: '0',
+      cardAttr3: '0',
       cardImage: '',
       cardRare: '',
       cardTrunfo: false,
-      hasTrunfo: false,
+      hasTrunfo: prevState,
       cards: [newCard, ...prevState.cards],
     }));
   };
@@ -118,7 +130,6 @@ class App extends React.Component {
       hasTrunfo,
       cards,
     } = this.state;
-
     return (
       <div>
         <h1>Tryunfo</h1>

@@ -11,11 +11,26 @@ class Form extends React.Component {
       cardImage,
       cardRare,
       cardTrunfo,
-      // hasTrunfo,
+      hasTrunfo,
       isSaveButtonDisabled,
       onInputChange,
       onSaveButtonClick,
     } = this.props;
+
+    const superTrunfo = (
+      <label htmlFor="trunfo">
+        Super Trunfo
+        <input
+          name="cardTrunfo"
+          onChange={ onInputChange }
+          checked={ cardTrunfo }
+          type="checkbox"
+          data-testid="trunfo-input"
+          id="trunfo"
+        />
+      </label>
+    );
+
     return (
       <div>
         <form className="form1">
@@ -108,17 +123,9 @@ class Form extends React.Component {
               <option value="muito raro"> muito raro </option>
             </select>
           </label>
-          <label htmlFor="trunfo">
-            Super Trunfo
-            <input
-              name="cardTrunfo"
-              onChange={ onInputChange }
-              checked={ cardTrunfo }
-              type="checkbox"
-              data-testid="trunfo-input"
-              id="trunfo"
-            />
-          </label>
+          {
+            hasTrunfo ? <p>Você já tem um Super Trunfo em seu baralho</p> : superTrunfo
+          }
           <button
             disabled={ isSaveButtonDisabled }
             onClick={ onSaveButtonClick }
@@ -137,16 +144,16 @@ class Form extends React.Component {
 Form.propTypes = {
   cardName: PropTypes.string.isRequired,
   cardDescription: PropTypes.string.isRequired,
-  cardAttr1: PropTypes.number.isRequired,
-  cardAttr2: PropTypes.number.isRequired,
-  cardAttr3: PropTypes.number.isRequired,
+  cardAttr1: PropTypes.string.isRequired,
+  cardAttr2: PropTypes.string.isRequired,
+  cardAttr3: PropTypes.string.isRequired,
   cardImage: PropTypes.string.isRequired,
   cardRare: PropTypes.string.isRequired,
   cardTrunfo: PropTypes.bool.isRequired,
-  // hasTrunfo: PropTypes.string.isRequired,
+  hasTrunfo: PropTypes.bool.isRequired,
   isSaveButtonDisabled: PropTypes.bool.isRequired,
   onInputChange: PropTypes.func.isRequired,
-  onSaveButtonClick: PropTypes.string.isRequired,
+  onSaveButtonClick: PropTypes.func.isRequired,
 };
 
 export default Form;
